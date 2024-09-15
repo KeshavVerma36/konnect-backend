@@ -26,9 +26,15 @@ const io = new Server(server, {
   }
 });
 
+// Allow CORS for HTTP routes as well
 app.use(cors({
-  origin: allowedOrigins // Use the same allowed origins for Express
+  origin: allowedOrigins
 }));
+
+// Health check route
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
 
 io.on("connection", (socket) => {
   console.log("A user connected");
